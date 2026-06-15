@@ -5,5 +5,10 @@
     <h5>{{Number::currency($Bus->price, 'IDR', 'id')}}</h5>
     <p>Available seat : {{$Bus->available_seat}}</p>
     <p>Departure Time : {{$Bus->departure_time}}</p>
-    <button>Booking Now</button>
+
+    <form action="{{ route('main.payment', $Bus->id) }}" method="GET">
+        <label for="book_seat">Jumlah Kursi yang ingin dipesan</label>
+        <input type="number" name="book_seat" min="1" max="{{ $Bus->available_seat }}" required>
+        <button type="submit">Lanjut Ke Pembayaran</button>
+    </form>
 </div>

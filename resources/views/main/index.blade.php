@@ -11,6 +11,6 @@
     @endauth
     
     @foreach ($allBus as $data)
-        <p><a href="{{ route('main.booking', $data->id) }}">{{$data->bus_name}}</a></p>
+        <p><a href="{{ route('main.showBooking', $data->id) }}">{{$data->bus_name}}</a></p>
     @endforeach
 </div>

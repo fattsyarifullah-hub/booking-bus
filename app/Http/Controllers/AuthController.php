@@ -20,7 +20,7 @@ class AuthController extends Controller
         $userLogin = $request->only('name', 'password');
 
         if (Auth::attempt($userLogin)) {
-            return redirect('/');
+            return redirect()->route('main.index');
         }
 
         return back()->with('error', 'login gagal');

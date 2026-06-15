@@ -29,13 +29,14 @@ Route::domain('dashboard.bookingbus.local')->group(function () {
 // === ROUTE UNTUK AKSES PUBLIK TANPA LOGIN === 
 Route::get('/', [MainController::class, 'index'])->name('main.index');
 Route::get('/login', [AuthController::class, 'showLogin']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login'])->name('main.login');
 Route::get('/register', [AuthController::class, 'showRegister']);
 Route::post('/register', [AuthController::class, 'register']);
-Route::get('/booking/{id}', [MainController::class, 'showBooking'])->name('main.booking');
+Route::get('/booking/{id}', [MainController::class, 'showBooking'])->name('main.showBooking');
 
 // === ROUTE UNTUK AKSES USER SETELAH LOGIN ===
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/booking/{id}', [MainController::class, 'booking']);
+    Route::get('/payment/{id}', [MainController::class, 'payment'])->name('main.payment');
+    Route::post('/booking/store/{id}', [MainController::class, 'booking'])->name('main.booking');
 });

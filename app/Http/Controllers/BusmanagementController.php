@@ -13,17 +13,13 @@ class BusmanagementController extends Controller
      * Display a listing of the resource.
      */
     
-    /**
-     * Show the form for creating a new resource.
-     */
+    // === FITUR ROUTING KE HALAMAN CREATE BUS  ===
     public function create()
     {
         return view('dashboard.management.bus.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // === FITUR MENAMBAH BUS BARU ===
     public function store(Request $request)
     {
         $request->validate([
@@ -63,27 +59,21 @@ class BusmanagementController extends Controller
         return redirect()->route('dashboard.management.bus.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    // === FITUR MELIHAT 1 BUS
     public function show(string $id)
     {
         $showBus = Bus::with('users')->findOrFail($id);
         return view('dashboard.management.bus.show', compact('showBus'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // === FITUR ROUTING KE HALAMAN EDIT BUS ===
     public function edit(string $id)
     {
         $editBus = Bus::findOrFail($id);
         return view('dashboard.management.bus.edit', compact('editBus'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // === FITUR UPDATE DATA BUS ===
     public function update(Request $request, string $id)
     {
         $editBus = Bus::findOrFail($id);
@@ -134,9 +124,7 @@ class BusmanagementController extends Controller
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // === FITUR UNTUK MENGHAPUS BUS ===
     public function destroy($id)
     {
         $deleteBus = Bus::findOrFail($id);
