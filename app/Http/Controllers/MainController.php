@@ -24,7 +24,7 @@ class MainController extends Controller
     }
 
     // === FITUR UNTUK VALIDASI KETIKA USER MAU BOOKING ===
-    public function Payment(Request $request, $id) {
+    public function payment(Request $request, $id) {
 
         // validasi input user di book seat
         $request->validate([
@@ -47,7 +47,7 @@ class MainController extends Controller
     }
 
     // === FITUR UNTUK BOOKING BUS ===
-    public function Booking(Request $request, $id) {
+    public function booking(Request $request, $id) {
 
         // validasi input dari user untuk booking
         $request->validate([
@@ -98,5 +98,24 @@ class MainController extends Controller
             DB::rollback();
             return back()->with('error', 'Terjadi kesalahan sistem');
         }
+    }
+
+    // === FITUR UNTUK SEARCH ===
+    public function search(Request $request) {
+        // mengambil input sesuai dengan namenya di blade
+        $busNameSearch = $request->input('bus_name');
+        $ruteFromSearch = $request->input('rute_from');
+        $ruteToSearch = $request->input('rute_to');
+
+        // menangani logika dimana search bisa dijalankan meskipun hanya 1 yang diinput oleh user, misal hanya rute tujuan maka yang tampil adalah bus bus yang memiliki rute tujuan itu
+        $allBus = Bus::query()
+        ->when($busNameSearch, function ($query, $busNameSearch) {
+            return $query->where('bus_name', 'like', '%' . $busNameSearch . '%');
+        })->when($ruteFromSearch, function ($query, $ruteFromSearch) {
+            return $query->where('rute_from', 'like', '%' . $ruteFromSearch . '%');
+        })->when($ruteToSearch, function ($query, $ruteToSearch) {
+            return $query->where('rute_to', 'like', '%' . $ruteToSearch . '%');
+        })->get();
+        return view('main.index', compact('allBus', 'busNameSearch', 'ruteFromSearch', 'ruteToSearch'));
     }
 }

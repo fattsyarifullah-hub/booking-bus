@@ -33,6 +33,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('main.login');
 Route::get('/register', [AuthController::class, 'showRegister']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/booking/{id}', [MainController::class, 'showBooking'])->name('main.showBooking');
+Route::get('/search', [MainController::class, 'search'])->name('main.search');
 
 // === ROUTE UNTUK AKSES USER SETELAH LOGIN ===
 Route::middleware(['auth'])->group(function () {
