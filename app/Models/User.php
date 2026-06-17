@@ -55,6 +55,6 @@ class User extends Authenticatable
             'orders',
             'user_id',
             'bus_id',
-        );
+        )->withPivot('book_seat', 'total_price');
     }
 }

@@ -4,6 +4,7 @@
         <input type="text" name="rute_from" value="{{ $ruteFromSearch ?? '' }}" placeholder="cari rute keberangkatan...">
         <input type="text" name="rute_to" value="{{ $ruteToSearch ?? '' }}" placeholder="cari rute tujuan...">
         <button type="submit">Cari</button>
+        <a href="{{ route('main.search')}}">reset</a>
     </form>
 
     @guest
@@ -11,6 +12,7 @@
     <p><a href="/register">ini register</a></p>
     @endguest
     @auth
+    <p><a href="{{ route('main.account') }}">Your Account</a></p>
     <form action="/logout" method="POST">
         @csrf
         <button type="submit">Logout</button>

@@ -37,7 +37,9 @@ Route::get('/search', [MainController::class, 'search'])->name('main.search');
 
 // === ROUTE UNTUK AKSES USER SETELAH LOGIN ===
 Route::middleware(['auth'])->group(function () {
+    Route::get('/account', [AuthController::class, 'account'])->name('main.account');
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/payment/{id}', [MainController::class, 'payment'])->name('main.payment');
+    Route::get('/success', [MainController::class, 'barcode'])->name('main.success');
     Route::post('/booking/store/{id}', [MainController::class, 'booking'])->name('main.booking');
 });

@@ -27,6 +27,6 @@ class Bus extends Model
             'bus_id',
             'user_id'
             // withpivot adalah untuk mengambil data dari tabel pivot yang tidak ada di table relasi yang bersebrangan 
-        )->withPivot(['book_seat', 'total_price']);
+        )->withPivot('book_seat', 'total_price');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Bus;
 use App\Models\Order;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -63,14 +64,14 @@ class MainController extends Controller
             DB::beginTransaction();
 
             // variabel untuk mengunci transaksi terlebih dahulu agar tidak ada tumpukan user booking
-            $transaction = Bus::LockForUpdate()->findOrFail($id);
+            $transaction = Bus::lockForUpdate()->findOrFail($id);
 
             // kondisi ketika ketersediaan kursi sudah habis
             if ($transaction->available_seat < $requestSeat) {
 
                 // mengembalikan ke depan
                 DB::rollBack();
-                return back()->route('main.showBooking')->with('error', 'maaf kursi tidak terpenuhi');
+                return back('main.showBooking')->with('error', 'maaf kursi tidak terpenuhi');
             }
 
             // mengurangi ketersediaan kursi dari booking seat user
@@ -83,25 +84,36 @@ class MainController extends Controller
             $totalPayment = $transaction->price * $requestSeat;
 
             // memasukkan data-data booking user ke database
-            $transaction->users()->Attach(Auth::id(), [
+            $transaction->users()->attach(Auth::id(), [
                 'book_seat' => $requestSeat,
                 'total_price' => $totalPayment,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
 
+            // membuat qrcode dengan string acak 
+            $randomStr = "PAY-" . strtoupper(Str::random(12));
+            
+            // mengambil melalui API untuk mengubah menjadi barcode
+            $qrcodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" . urlencode($randomStr);
+
             // menyimpan secara permanen ke database
             DB::commit();
 
-            return redirect()->route('main.index')->with('success', 'berhasil order');
+            return redirect()->route('main.success')->with('qr_code', $qrcodeUrl)->with('total_payment', $totalPayment)->with('success', 'berhasil order');
         } catch(\Exception $e) {
             DB::rollback();
             return back()->with('error', 'Terjadi kesalahan sistem');
         }
     }
 
+    public function barcode() {
+        return view('main.success');
+    }
+
     // === FITUR UNTUK SEARCH ===
     public function search(Request $request) {
+        
         // mengambil input sesuai dengan namenya di blade
         $busNameSearch = $request->input('bus_name');
         $ruteFromSearch = $request->input('rute_from');

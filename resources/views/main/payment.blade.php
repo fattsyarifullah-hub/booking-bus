@@ -1,9 +1,9 @@
 <div>
     <h3>Konfirmasi Pesanan Bus: {{$Bus->bus_name}}</h3>
-    <p>Harga per Kursi : {{Number::currency($Bus->price, 'IDR','id')}}</p>
+    <p>Harga per Kursi : {{Number::currency($Bus->price, 'IDR','id', precision: 0)}}</p>
     <p>Jumlah Kursi dipesan : {{$requestSeat}}</p>
 
-    <h4>Jumlah Yang harus dibayar : {{$totalPayment}}</h4>
+    <h4>Jumlah Yang harus dibayar : {{Number::currency($totalPayment, 'IDR', 'id', precision: 0)}}</h4>
 
     <form action="{{ route('main.booking', $Bus->id) }}" method="POST">
         @csrf
