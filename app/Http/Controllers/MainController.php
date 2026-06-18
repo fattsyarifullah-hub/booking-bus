@@ -91,16 +91,16 @@ class MainController extends Controller
                 'updated_at' => now(),
             ]);
 
-            // membuat qrcode dengan string acak 
-            $randomStr = "PAY-" . strtoupper(Str::random(12));
+            // // membuat qrcode dengan string acak 
+            // $randomStr = "PAY-" . strtoupper(Str::random(12));
             
-            // mengambil melalui API untuk mengubah menjadi barcode
-            $qrcodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" . urlencode($randomStr);
+            // // mengambil melalui API untuk mengubah menjadi barcode
+            // $qrcodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" . urlencode($randomStr);
 
             // menyimpan secara permanen ke database
             DB::commit();
 
-            return redirect()->route('main.success')->with('qr_code', $qrcodeUrl)->with('total_payment', $totalPayment)->with('success', 'berhasil order');
+            return redirect()->route('main.success')->with('total_payment', $totalPayment)->with('success', 'berhasil order');
         } catch(\Exception $e) {
             DB::rollback();
             return back()->with('error', 'Terjadi kesalahan sistem');

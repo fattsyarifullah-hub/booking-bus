@@ -10,10 +10,8 @@
         <p>{{ Number::currency(session('total_payment'), 'IDR','id') }}</p>
     @endif
 
-    @if (session('qr_code'))
-        <img src="{{ session('qr_code') }}" alt="Barcode untuk payment">
+        <img src="{{ asset('photo/qris.png')  }}" alt="Barcode untuk payment">
         <p>Ini adalah barcode simulasi, tidak digunakan untuk pembayaran asli</p>
-    @endif
 
     <a href="{{ route('main.index') }}">Kembali ke halaman utama</a>
 </div>
