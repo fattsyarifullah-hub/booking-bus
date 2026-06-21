@@ -5,6 +5,7 @@ use App\Http\Controllers\authController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BusmanagementController;
+use App\Http\Middleware\PaymentAccess;
 
 // === ROUTE UNTUK SUBDOMAIN DASHBOARD ===
 Route::domain('dashboard.bookingbus.local')->group(function () {
@@ -40,6 +41,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/account', [AuthController::class, 'account'])->name('main.account');
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/payment/{id}', [MainController::class, 'payment'])->name('main.payment');
-    Route::get('/success', [MainController::class, 'barcode'])->name('main.success');
+    Route::get('/success', [MainController::class, 'barcode'])->middleware(PaymentAccess::class)->name('main.success');
     Route::post('/booking/store/{id}', [MainController::class, 'booking'])->name('main.booking');
 });
