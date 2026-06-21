@@ -14,7 +14,7 @@ class MainController extends Controller
 
     // === FITUR ROUTING KE HALAMAN UTAMA ===
     public function index() {
-        $allBus = Bus::all();
+        $allBus = Bus::simplePaginate(6);
         return view('main.index', compact('allBus'));
     }
 
@@ -98,9 +98,10 @@ class MainController extends Controller
             // $qrcodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" . urlencode($randomStr);
 
             // menyimpan secara permanen ke database
+            $qrCode = asset('photo/qris.png');
             DB::commit();
 
-            return redirect()->route('main.success')->with('total_payment', $totalPayment)->with('success', 'berhasil order');
+            return redirect()->route('main.success')->with('total_payment', $totalPayment)->with('qr_code', $qrCode)->with('success', 'berhasil order');
         } catch(\Exception $e) {
             DB::rollback();
             return back()->with('error', 'Terjadi kesalahan sistem');
@@ -127,7 +128,7 @@ class MainController extends Controller
             return $query->where('rute_from', 'like', '%' . $ruteFromSearch . '%');
         })->when($ruteToSearch, function ($query, $ruteToSearch) {
             return $query->where('rute_to', 'like', '%' . $ruteToSearch . '%');
-        })->get();
+        })->simplePaginate(6)->withQueryString();
         return view('main.index', compact('allBus', 'busNameSearch', 'ruteFromSearch', 'ruteToSearch'));
     }
 }
