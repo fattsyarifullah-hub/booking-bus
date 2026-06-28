@@ -7,7 +7,7 @@
     <div class="max-w-md w-full bg-white rounded-xl shadow-lg p-8 border border-gray-100">
         
         <div class="text-center mb-8">
-            <h2 class="text-2xl font-bold text-violet-700">Tambah Bus Baru</h2>
+            <h2 class="text-2xl font-bold text-violet-700">Edit Data Bus</h2>
             <p class="text-sm text-gray-500 mt-1">Silakan isi formulir di bawah ini dengan lengkap.</p>
         </div>
 

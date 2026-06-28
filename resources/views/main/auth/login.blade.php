@@ -11,9 +11,11 @@
                 <label for="name" class="text-white text-xs font-bold uppercase mb-1">name</label>
                 <input type="text" name="name" placeholder="username anda" size="15"
                     class="w-full bg-violet-100/90 text-gray-800 placeholder-gray-400 text-sm rounded px-3 py-2.5 focus:outline-none"><br><br>
+
                 <label for="password" class="text-white text-xs font-bold uppercase mb-1">password</label>
                 <input type="password" name="password" placeholder="password anda" size="15"
                     class="w-full bg-violet-100/90 text-gray-800 placeholder-gray-400 text-sm rounded px-3 py-2.5 focus:outline-none"><br><br>
+                    
                 <div class="flex justify-center">
                     <button type="submit" name="submit"
                         class="p-5 bg-white text-violet-700 hover:bg-violet-700 hover:text-white hover:border border-white font-extrabold text-sm uppercase rounded py-2.5 transition shadow-sm">login

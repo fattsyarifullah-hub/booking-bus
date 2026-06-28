@@ -32,13 +32,17 @@
                     <span>{{ $showBus->rute_to }}</span>
                 </div>
 
-                <div class="grid grid-cols-2 gap-4 border-t border-b border-slate-100 py-4 mb-6">
+                <div class="grid grid-cols-3 gap-4 border-t border-b border-slate-100 py-4 mb-6">
                     <div>
                         <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Kursi Tersedia</p>
                         <p class="text-base font-bold text-slate-700 mt-0.5">{{ $showBus->available_seat }} Kursi</p>
                     </div>
                     <div>
-                        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Jam Keberangkatan</p>
+                        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Kursi Tersedia</p>
+                        <p class="text-base font-bold text-slate-700 mt-0.5">{{ $showBus->available_seat }} Kursi</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold"> Keberangkatan</p>
                         <p class="text-base font-bold text-slate-700 mt-0.5">{{ \Carbon\Carbon::parse($showBus->departure_time)->format('d M Y') }}</p>
                     </div>
                 </div>
@@ -48,7 +52,7 @@
                 <div>
                     <p class="text-xs text-slate-400 font-medium">Harga Tiket</p>
                     <p class="text-2xl font-extrabold text-violet-700">
-                        {{ Number::currency($showBus->price, 'IDR', 'id') }}
+                        {{ Number::currency($showBus->price, 'IDR', 'id', precision:0) }}
                     </p>
                 </div>
             </div>
@@ -75,7 +79,7 @@
                         <tr class="hover:bg-slate-50/50 transition-colors">
                             <td class="py-4 font-medium text-slate-700">{{ $item->name }}</td>
                             <td class="py-4 text-center text-slate-600 font-semibold">{{ $item->pivot->book_seat }}</td>
-                            <td class="py-4 text-right font-bold text-slate-800">{{ Number::currency($item->pivot->total_price, 'IDR', 'id') }}</td>
+                            <td class="py-4 text-right font-bold text-slate-800">{{ Number::currency($item->pivot->total_price, 'IDR', 'id', precision:0) }}</td>
                         </tr>
                     @empty
                         <tr>
