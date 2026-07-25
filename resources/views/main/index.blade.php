@@ -42,7 +42,7 @@
         </nav>
 
         <header>
-            <div class="relative w-full h-[400px] md:h-[500px] bg-cover bg-center flex flex-col justify-content items-center px-4"
+            <div class="relative w-full h-100 md:h-125 bg-cover bg-center flex flex-col justify-content items-center px-4"
                 style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2000');">
 
                 <div class="text-center text-white mt-12 md:mt-20 z-10">
@@ -113,7 +113,7 @@
                                     class="w-full h-full object-cover">
                             </div>
 
-                            <div class="p-5 flex-grow flex flex-col justify-between">
+                            <div class="p-5 grow flex flex-col justify-between">
 
                                 <div>
                                     <h3 class="text-lg font-bold text-gray-900 mb-1 tracking-tight">
@@ -150,6 +150,11 @@
             <div class="flex justify-center items-center">
                 {{ $allBus->links() }}
             </div>
+
+            {{-- Testimonial Section --}}
+            <x-testi-container>
+
+            </x-testi-container>
         </main>
 
         <footer class="bg-violet-700 border-t border-slate-100 mt-10">
@@ -179,7 +184,8 @@
                         <h4 class="text-xs font-semibold text-white uppercase tracking-wider mb-3">Hubungi Kami</h4>
                         <ul class="space-y-2 text-xs text-white">
                             <li class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
                                     </path>

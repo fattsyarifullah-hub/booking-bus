@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="grid grid-cols-2 gap-1.5 p-2 md:gap-3 md:p-3 lg:gap-6 lg:p-4">
+    <div class="grid grid-cols-1 gap-1.5 p-2 md:gap-3 md:p-3 md:grid-cols-2 lg:gap-6 lg:p-4">
 
         <div
             class="grid grid-cols-1 gap-4 place-items-center bg-violet-700 p-5 rounded-lg shadow-lg transition-all duration:500 hover:-translate-y-1 hover:shadow-md">
